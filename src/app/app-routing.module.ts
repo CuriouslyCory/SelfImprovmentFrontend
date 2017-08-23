@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // route components
-import { HomeComponent } from './home/home.component';
-import { SettingsComponent } from './settings/settings.component';
-import { StatsComponent } from './stats/stats.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './views/home/home.component';
+import { SettingsComponent } from './views/settings/settings.component';
+import { StatsComponent } from './views/stats/stats.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },

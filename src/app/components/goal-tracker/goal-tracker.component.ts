@@ -1,4 +1,7 @@
+// import core components
 import { Component, Input, OnInit } from '@angular/core';
+
+// import models
 import { Goal } from '../../models/goal';
 
 
@@ -11,36 +14,47 @@ export class GoalTrackerComponent implements OnInit {
 
   @Input() goal: Goal;
   currentColor: string;
-  currentPercentComplete: string;
+  currentPercentComplete: string | number;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    // set the current color and percentage
     this.currentColor = this.colorStatus();
     this.currentPercentComplete = this.percentComplete();
   }
 
-  public addProgress (goalId) {
+  // add one to the goal progrss
+  public addProgress (): void {
     this.goal.progress += 1;
-    
+
     this.currentColor = this.colorStatus();
     this.currentPercentComplete = this.percentComplete();
   }
 
-  public subtractProgress (goalId) {
-    this.goal.progress -= 1;
-    
-    this.currentColor = this.colorStatus();
-    this.currentPercentComplete = this.percentComplete();
+  // subtract one from the progress tracker
+  public subtractProgress (): void {
+    // you can't go below zero
+    if (this.goal.progress - 1 >= 0 ) {
+      this.goal.progress -= 1;
+
+      this.currentColor = this.colorStatus();
+      this.currentPercentComplete = this.percentComplete();
+    }
   }
 
-  public percentComplete () {
-    return (this.goal.progress / this.goal.target) * 100 + '%';
+  // calulate the current percentage complete
+  public percentComplete ( asString = true): string | number {
+    if ( asString ) {
+      return (this.goal.progress / this.goal.target) * 100 + '%';
+    } else {
+      return (this.goal.progress / this.goal.target) * 100;
+    }
   }
 
-  public colorStatus() {
+  // returns the appropriate color string depending on the warn level
+  public colorStatus(): string {
     const PROGRESSNUM = this.goal.progress / this.goal.target;
-    console.log(PROGRESSNUM);
     if ( this.goal.direction === 'max' ) {
       if ( PROGRESSNUM < 0.5 ) {
         return '#4CAF50';

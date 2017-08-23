@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MdButtonModule,
   MdDatepickerModule,
+  MdDialogModule,
   MdCardModule,
   MdIconModule,
   MdInputModule,
@@ -26,14 +27,17 @@ import 'hammerjs';
 
 // import app components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './views/home/home.component';
 
 // import routing
 import { AppRoutingModule } from './app-routing.module';
-import { StatsComponent } from './stats/stats.component';
-import { SettingsComponent } from './settings/settings.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { StatsComponent } from './views/stats/stats.component';
+import { SettingsComponent } from './views/settings/settings.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
+
+// import custom common components
 import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.component';
+import { GoalSettingsComponent } from './views/goal-settings/goal-settings.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.com
     SettingsComponent,
     NotFoundComponent,
     GoalTrackerComponent,
+    GoalSettingsComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -54,6 +59,7 @@ import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.com
     MdButtonModule,
     MdCardModule,
     MdDatepickerModule,
+    MdDialogModule,
     MdIconModule,
     MdInputModule,
     MdListModule,
@@ -65,6 +71,6 @@ import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.com
     MdTabsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, GoalSettingsComponent]
 })
 export class AppModule { }

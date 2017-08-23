@@ -19,7 +19,7 @@ export class AppComponent {
   public pageTitle: string;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    router.events.subscribe((url:any) => {
+    router.events.subscribe((url: any) => {
       if (url.url !== '/') {
         this.pageTitle = this.navElements.filter( ( element: any ) => element.route === url.url )[0].name;
       }

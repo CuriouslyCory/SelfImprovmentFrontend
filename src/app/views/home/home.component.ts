@@ -1,4 +1,9 @@
+// import core components
 import { Component, OnInit } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
+
+// import dialog content for adding a new goal
+import { GoalSettingsComponent } from '../goal-settings/goal-settings.component';
 
 @Component({
   selector: 'app-home',
@@ -32,12 +37,16 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor( public dialog: MdDialog ) { }
 
   ngOnInit() {
   }
 
   addNew() {
+    const DIALOGREF = this.dialog.open( GoalSettingsComponent );
+    DIALOGREF.afterClosed().subscribe(result => {
+      // add new component to list
+    });
   }
 
 }

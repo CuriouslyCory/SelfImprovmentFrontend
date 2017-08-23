@@ -4,11 +4,11 @@
 		<div class="progress-indicator" [ngStyle]="{'width': currentPercentComplete, 'background-color': currentColor}"></div>
 	</div>
 	<div class="gt-bottom" layout="row" layout-align="space-between end" layout-fill flex>
-		<button md-button (click)="subtractProgress(goal.id)">
+		<button md-button (click)="subtractProgress()">
 			<md-icon>remove</md-icon>
 		</button>
 		<span class="gt-progress" flex>{{goal.progress}} / {{goal.target}}</span>
-		<button md-button (click)="addProgress(goal.id)">
+		<button md-button (click)="addProgress()">
 			<md-icon>add</md-icon>
 		</button>
 	</div>
