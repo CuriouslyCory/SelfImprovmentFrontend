@@ -1,0 +1,15 @@
+<div id="gt-wrapper" layout="column" layout-align="space-between center" flex>
+	<div class="gt-top" layout="column" layout-align="center center" layout-fill flex>
+		<span class="gt-title">{{goal.title}}</span>
+		<div class="progress-indicator" [ngStyle]="{'height': currentPercentComplete, 'background-color': currentColor}"></div>
+	</div>
+	<div class="gt-bottom" layout="row" layout-align="space-between end" layout-fill flex>
+		<button md-button (click)="subtractProgress(goal.id)">
+			<md-icon>remove</md-icon>
+		</button>
+		<span class="gt-progress" flex>{{goal.progress}} / {{goal.target}}</span>
+		<button md-button (click)="addProgress(goal.id)">
+			<md-icon>add</md-icon>
+		</button>
+	</div>
+</div>

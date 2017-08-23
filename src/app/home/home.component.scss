@@ -1,0 +1,13 @@
+.recent-notifications {
+	md-list-item {
+		h4 {
+			max-width: 300px;
+		}
+	}
+	
+	.wrapper {
+		border-bottom: 1px solid #DDD;
+		margin: 5px;
+		padding: 5px;
+	}
+}

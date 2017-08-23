@@ -1,0 +1,45 @@
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" class="md-content" class="inset" flex>
+	<md-card class="current-progress">
+		<md-card-header>
+			<md-icon md-card-avatar>assessment</md-icon>
+			<md-card-title>Current Progress</md-card-title>
+		</md-card-header>
+		<md-card-content>
+			<div *ngFor="let goal of goals" layout="row" class="wrapper" flex>
+				<si-goal-tracker [goal]="goal"></si-goal-tracker>
+			</div>
+		</md-card-content>
+		<md-card-actions layout="row" align="end">
+			<div flex></div>
+			<button md-icon-button md-mini-fab [mdMenuTriggerFor]="addNewMenu">
+				<md-icon>add</md-icon> 
+			</button>
+			<md-menu #addNewMenu="mdMenu">
+				<button md-menu-item>
+					<md-icon>add</md-icon>
+					<span>Goal</span>
+				</button>
+				<button md-menu-item>
+					<md-icon>add</md-icon>
+					<span>Campaign</span>
+				</button>
+			</md-menu>
+		</md-card-actions>
+	</md-card>
+	<md-card class="recent-notifications">
+		<md-card-header>
+			<md-icon md-card-avatar>announcement</md-icon>
+			<md-card-title>Recent Notifications</md-card-title>
+		</md-card-header>
+		<md-card-content>
+			<md-list>
+				<ng-template let-notification ngFor [ngForOf]="recentNotifications">
+					<div class="wrapper">
+						<span md-line>{{notification.date | date}}</span>
+						<h4 md-line flex>{{notification.notificationText}}</h4>
+					</div>
+				</ng-template>
+			</md-list>
+		</md-card-content>
+	</md-card>
+</div>

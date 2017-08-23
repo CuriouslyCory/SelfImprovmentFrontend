@@ -1,0 +1,54 @@
+#gt-wrapper {
+	min-height: 12em;
+	min-width: 15em;
+	width: 100%;
+	margin: 1em 0;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px;
+	box-shadow: 1px 1px 5px #DDDDDD;
+	
+	.gt-top {
+		min-height: 9em;
+	}
+	
+	.gt-bottom {
+		height: auto;
+	}
+	
+	.mat-button {
+		width: 2.75em;
+		height: 2.75em;
+		min-width: auto;
+		padding: 0;
+		margin: 0;
+		border-top: 1px solid #DDDDDD;
+		border-radius: 0;
+	}
+	
+	.gt-progress {
+		width: 60%;
+		height: 2.75em;
+		text-align: center;
+		border-top: 1px solid #DDDDDD;
+		padding: 8px 0;
+	}
+	
+	.gt-top {
+		position: relative;
+		
+		.gt-title {
+			position: absolute;
+			z-index: 10;
+		}
+		
+		.progress-indicator {
+			background-color: #4CAF50;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			transition: height 0.25s ease-out;
+		}
+	}
+	
+}

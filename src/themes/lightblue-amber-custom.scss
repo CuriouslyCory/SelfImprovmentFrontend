@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+
+@include mat-core();
+
+$primary: mat-palette($mat-light-blue);
+$accent: mat-palette($mat-amber);
+$warn: mat-palette($mat-red);
+$theme: mat-light-theme($primary, $accent, $warn);
+
+$primary-font: 'Josefin Sans', sans-serif;
+
+$custom-typography: mat-typography-config(
+	$font-family: $primary-font
+);
+
+@include angular-material-theme($theme);
+@include covalent-theme($theme);
+@include mat-base-typography($custom-typography);
+@include mat-checkbox-typography($custom-typography);
