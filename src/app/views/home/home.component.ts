@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   addNew() {
     const DIALOGREF = this.dialog.open( GoalSettingsComponent );
     DIALOGREF.afterClosed().subscribe(result => {
-      // add new component to list
+      console.log(result);
     });
   }
 

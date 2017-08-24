@@ -1,6 +1,7 @@
 // angular 2 components
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 // import material components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +15,7 @@ import {
   MdListModule,
   MdMenuModule,
   MdProgressBarModule,
+  MdSelectModule,
   MdSidenavModule,
   MdToolbarModule,
   MdGridListModule,
@@ -56,6 +58,7 @@ import { GoalSettingsComponent } from './views/goal-settings/goal-settings.compo
     CovalentLayoutModule,
     CovalentMenuModule,
     CovalentNotificationsModule,
+    FormsModule,
     MdButtonModule,
     MdCardModule,
     MdDatepickerModule,
@@ -66,11 +69,15 @@ import { GoalSettingsComponent } from './views/goal-settings/goal-settings.compo
     MdMenuModule,
     MdProgressBarModule,
     MdToolbarModule,
+    MdSelectModule,
     MdSidenavModule,
     MdGridListModule,
     MdTabsModule
   ],
+  entryComponents: [
+    GoalSettingsComponent
+  ],
   providers: [],
-  bootstrap: [AppComponent, GoalSettingsComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

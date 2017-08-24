@@ -1,3 +1,31 @@
-<p>
-  goal-settings works!
-</p>
+<section>
+	<div>
+		<h1>Describe your goal</h1>
+	</div>
+	<div id="step1">
+		<md-select class="input-full-width" placeholder="I want to..." [(ngModel)]="direction" name="direction">
+			<md-option value="min">... start...</md-option>
+			<md-option value="max">... stop...</md-option>
+		</md-select>
+	</div>
+	<div id="step2">
+		<md-input-container class="input-full-width">
+			<input mdInput placeholder="Name your habit" [(ngModel)]="title">
+		</md-input-container>
+	</div>
+	<div id="step3">
+		<md-input-container class="input-full-width">
+			<input mdInput placeholder="times" [(ngModel)]="target" name="target">
+		</md-input-container>
+	</div>
+	<div id="step4">
+		<md-select placeholder="per" class="input-full-width" [(ngModel)]="recurrence" name="recurrence">
+			<md-option value="day">day</md-option>
+			<md-option value="week">week</md-option>
+			<md-option value="month">month</md-option>
+		</md-select>
+	</div>
+	<div id="step5">
+		<button md-raised-button md-dialog-close>Save</button>
+	</div>
+</section>

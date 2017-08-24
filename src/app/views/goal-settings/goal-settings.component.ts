@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-goal-settings',
@@ -7,6 +7,11 @@ import { MdDialog, MdDialogRef } from '@angular/material';
   styleUrls: ['./goal-settings.component.scss']
 })
 export class GoalSettingsComponent implements OnInit {
+
+  public goalType: string;
+  public target: number;
+  public recurrence: string;
+
 
   constructor( public dialogRef: MdDialogRef<GoalSettingsComponent> ) { }
 
