@@ -3,31 +3,32 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-// import models
-import { Goal } from '../models/goal';
-
 // import environemnt variables
 import { environment } from '../../environments/environment';
 
-@Injectable()
-export class GoalService {
 
-  private eventApiUrl = `${environment.apiUrl}/goal`;
-  private accessToken = localStorage.getItem('accessToken');
+@Injectable()
+export class AuthService {
+
+  private eventApiUrl = `${environment.apiUrl}/authentication`;
+  private accessToken: string;
 
   constructor( private http: Http ) { }
 
-  // create event action
-  createGoal(goal: Goal): Promise<Goal> {
-    // set the content type so lumen knows how to translate the content body
-    const HEADERS = new Headers({ 'x-access-token': 'application/json' });
-    const OPTIONS = new RequestOptions({ headers: HEADERS });
-
+  login (email: string, password: string): Promise<boolean> {
     // post the event to the api
-    return this.http.post( `${this.eventApiUrl}/event`, JSON.stringify(goal), OPTIONS )
+    return this.http.post( `${this.eventApiUrl}`, JSON.stringify({email: email, password: password}))
                     .toPromise()
                     .then(response => {
-                      return response.json() as Goal
+                      if (response.json().success && response.json().token) {
+                        console.log('login successful');
+                        this.accessToken = response.json().token;
+                        localStorage.setItem('accessToken', this.accessToken);
+                        return true;
+                      } else {
+                        console.log('login failed');
+                        return false
+                      }
                     })
                     .catch(this.handleError);
   }

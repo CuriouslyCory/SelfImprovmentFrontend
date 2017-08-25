@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 // import material components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +41,14 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 // import custom common components
 import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.component';
 import { GoalSettingsComponent } from './views/goal-settings/goal-settings.component';
+import { LoginComponent } from './views/login/login.component';
+
+// import services
+import { AuthService } from './services/auth.service';
+import { GoalService } from './services/goal.service';
+
+// import guards
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -50,6 +59,7 @@ import { GoalSettingsComponent } from './views/goal-settings/goal-settings.compo
     NotFoundComponent,
     GoalTrackerComponent,
     GoalSettingsComponent,
+    LoginComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -59,6 +69,7 @@ import { GoalSettingsComponent } from './views/goal-settings/goal-settings.compo
     CovalentMenuModule,
     CovalentNotificationsModule,
     FormsModule,
+    HttpModule,
     MdButtonModule,
     MdCardModule,
     MdDatepickerModule,
@@ -77,7 +88,7 @@ import { GoalSettingsComponent } from './views/goal-settings/goal-settings.compo
   entryComponents: [
     GoalSettingsComponent
   ],
-  providers: [],
+  providers: [ AuthGuard, GoalService, AuthService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

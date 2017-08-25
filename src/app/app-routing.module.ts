@@ -4,14 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 // route components
 import { HomeComponent } from './views/home/home.component';
+import { LoginComponent } from './views/login/login.component';
 import { SettingsComponent } from './views/settings/settings.component';
 import { StatsComponent } from './views/stats/stats.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 
+// import auth guard
+import { AuthGuard } from './guards/auth.guard';
+
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'stats', component: StatsComponent },
+  { path: 'home', component: HomeComponent, canActivate: [ AuthGuard ] },
+  { path: 'login', component: LoginComponent },
+  { path: 'settings', component: SettingsComponent, canActivate: [ AuthGuard ] },
+  { path: 'stats', component: StatsComponent, canActivate: [ AuthGuard ] },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: '**', component: NotFoundComponent }
 ];

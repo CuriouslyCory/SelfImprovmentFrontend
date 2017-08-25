@@ -1,5 +1,5 @@
 export class Goal {
-    goalId: number;
+    _id: string;
     recurrence: string;
     title: string;
     notes: string;
