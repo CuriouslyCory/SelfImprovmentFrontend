@@ -5,6 +5,12 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 // import dialog content for adding a new goal
 import { GoalSettingsComponent } from '../goal-settings/goal-settings.component';
 
+// import services
+import { GoalService } from '../../services/goal.service';
+
+// import models
+import { Goal } from '../../models/goal';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,12 +18,7 @@ import { GoalSettingsComponent } from '../goal-settings/goal-settings.component'
 })
 export class HomeComponent implements OnInit {
 
-  goals = [
-    {'id': 1, 'title': 'Min Glasses of Water', 'progress': 6, 'target': 8, direction: 'min'},
-    {'id': 2, 'title': 'Max Alcaholic Beverages', 'progress': 0, 'target': 3, direction: 'max'},
-    {'id': 3, 'title': 'Min Meditation Sessions', 'progress': 1, 'target': 1, direction: 'min'},
-    {'id': 4, 'title': 'Min Eat Healthy Lunch', 'progress': 1, 'target': 4, direction: 'min'},
-  ];
+  public goals: Goal[];
 
   recentNotifications = [
     {
@@ -37,16 +38,25 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor( public dialog: MdDialog ) { }
+  constructor( public dialog: MdDialog, private goalService: GoalService ) { }
 
   ngOnInit() {
+    this.refreshGoals();
   }
 
   addNew() {
     const DIALOGREF = this.dialog.open( GoalSettingsComponent );
     DIALOGREF.afterClosed().subscribe(result => {
       console.log(result);
+      this.refreshGoals();
     });
+  }
+
+  refreshGoals(): void {
+    this.goalService.getActive()
+      .then( goals => {
+        this.goals = goals;
+      });
   }
 
 }

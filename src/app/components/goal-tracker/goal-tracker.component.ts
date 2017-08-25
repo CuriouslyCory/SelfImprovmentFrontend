@@ -4,6 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 // import models
 import { Goal } from '../../models/goal';
 
+// import services
+import { GoalService } from '../../services/goal.service';
 
 @Component({
   selector: 'si-goal-tracker',
@@ -16,7 +18,7 @@ export class GoalTrackerComponent implements OnInit {
   currentColor: string;
   currentPercentComplete: string | number;
 
-  constructor() { }
+  constructor( private goalService: GoalService ) { }
 
   ngOnInit(): void {
     // set the current color and percentage
@@ -25,22 +27,21 @@ export class GoalTrackerComponent implements OnInit {
   }
 
   // add one to the goal progrss
-  public addProgress (): void {
-    this.goal.progress += 1;
+  public modProgress ( i ): void {
+    if ( this.goal.progress + i < 0 ) {
+      return;
+    }
 
+    this.goal.progress += i;
     this.currentColor = this.colorStatus();
     this.currentPercentComplete = this.percentComplete();
-  }
 
-  // subtract one from the progress tracker
-  public subtractProgress (): void {
-    // you can't go below zero
-    if (this.goal.progress - 1 >= 0 ) {
-      this.goal.progress -= 1;
-
-      this.currentColor = this.colorStatus();
-      this.currentPercentComplete = this.percentComplete();
-    }
+    this.goalService.setProgress(this.goal)
+      .then( result => {
+        if ( result !== true ) {
+          console.log('there was an error saving progress');
+        }
+      });
   }
 
   // calulate the current percentage complete

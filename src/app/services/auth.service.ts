@@ -12,12 +12,17 @@ export class AuthService {
 
   private eventApiUrl = `${environment.apiUrl}/authentication`;
   private accessToken: string;
+  private reqOptions: RequestOptions;
 
-  constructor( private http: Http ) { }
+  constructor( private http: Http ) {
+    // set the access token
+    const HEADERS = new Headers({ 'x-access-token': this.accessToken, 'content-type': 'application/json'});
+    this.reqOptions = new RequestOptions({ headers: HEADERS });
+  }
 
   login (email: string, password: string): Promise<boolean> {
     // post the event to the api
-    return this.http.post( `${this.eventApiUrl}`, JSON.stringify({email: email, password: password}))
+    return this.http.post( this.eventApiUrl, {email: email, password: password}, this.reqOptions)
                     .toPromise()
                     .then(response => {
                       if (response.json().success && response.json().token) {
@@ -31,6 +36,11 @@ export class AuthService {
                       }
                     })
                     .catch(this.handleError);
+  }
+
+  logout () {
+    this.accessToken = null;
+    localStorage.removeItem('accessToken');
   }
 
   // I would definitely want to handle errors better in a real world situation

@@ -24,9 +24,7 @@ export class LoginComponent implements OnInit {
   login () {
     this.authService.login(this.email, this.password)
       .then(result => {
-        console.log(result);
         if ( result === true ) {
-          console.log('should navigate');
           this.router.navigate(['/home']);
         } else {
           this.error = 'Invalid username or password';

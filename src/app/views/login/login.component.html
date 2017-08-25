@@ -1,10 +1,25 @@
-<section layout="column">
-	<md-input-container>
-		<input mdInput placeholder="Username or Email" [(ngModel)]="email">
-	</md-input-container>
-	<md-input-container>
-		<input mdInput placeholder="password" [(ngModel)]="password" type="password">
-	</md-input-container>
-	
-	<button md-raised-button (click)="login()">Login</button>
+<section id="login-header">
+	<div class="contents-block" layout="column" layout-align="center center">
+		<h1>Push Further</h1>
+	</div>
+</section>
+<section id="login-wrapper">
+	<md-card>
+		<md-card-content>
+			<div layout-fill layout="column">
+				<md-input-container>
+					<input mdInput placeholder="User Name or Email" [(ngModel)]="email">
+				</md-input-container>
+				<md-input-container>
+					<input mdInput placeholder="Password" [(ngModel)]="password" type="password">
+				</md-input-container>
+			</div>
+			<div class="md-warn">
+				{{error}}
+			</div>
+		</md-card-content>
+		<md-card-actions>
+			<button md-raised-button (click)="login()">Login</button>
+		</md-card-actions>
+	</md-card>
 </section>

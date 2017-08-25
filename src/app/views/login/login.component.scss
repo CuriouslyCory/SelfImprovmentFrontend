@@ -1,0 +1,26 @@
+#login-header {
+	background-image: url('../../../assets/clouds.jpg');
+	width: 100%;
+	padding-bottom: 15%;
+	min-height: 100px;
+	background-size: cover;
+	position: relative;
+	color: white;
+}
+
+.contents-block {
+    //background-color: rgba(200, 200, 200, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    h1 {
+		font-size: 3em;
+	}
+}
+
+#login-wrapper {
+
+}

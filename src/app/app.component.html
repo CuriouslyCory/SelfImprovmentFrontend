@@ -1,11 +1,18 @@
 <td-layout #layout>
 	<td-navigation-drawer sidenavTitle="Navigaiton">
 		<md-nav-list>
-			<ng-template let-item let-last="last" ngFor [ngForOf]="navElements">
-				<a md-list-item (click)="layout.close()" routerLink="{{item.route}}" routerLinkActive="active">
-					<md-icon>{{item.icon}}</md-icon><span>{{item.name}}</span>
-				</a>
-			</ng-template>
+			<a md-list-item (click)="layout.close()" routerLink="/home" routerLinkActive="active">
+				<md-icon>home</md-icon><span>Home</span>
+			</a>
+			<a md-list-item (click)="layout.close()" routerLink="/stats" routerLinkActive="active">
+				<md-icon>assessment</md-icon><span>Statistics</span>
+			</a>
+			<a md-list-item (click)="layout.close()" routerLink="/settings" routerLinkActive="active">
+				<md-icon>settings</md-icon><span>Settings</span>
+			</a>
+			<a md-list-item (click)="logout(); layout.close();">
+				<md-icon>eject</md-icon><span>Log Out</span>
+			</a>
 		</md-nav-list>
 	</td-navigation-drawer>
 	<td-layout-nav toolbarTitle="{{pageTitle}}">

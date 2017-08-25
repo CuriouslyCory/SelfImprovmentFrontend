@@ -12,24 +12,46 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class GoalService {
 
-  private eventApiUrl = `${environment.apiUrl}/goal`;
+  private goalApiUrl = `${environment.apiUrl}/goal`;
   private accessToken = localStorage.getItem('accessToken');
+  private reqOptions: RequestOptions;
 
-  constructor( private http: Http ) { }
+  constructor( private http: Http ) {
+    // set the access token
+    const HEADERS = new Headers({ 'x-access-token': this.accessToken, 'content-type': 'application/json'});
+    this.reqOptions = new RequestOptions({ headers: HEADERS });
+  }
+
+
+  // get all active goals for this user
+  getActive(): Promise<Goal[]> {
+    return this.http.get(this.goalApiUrl, this.reqOptions)
+      .toPromise()
+      .then( response => {
+        return response.json() as Goal[]
+      })
+      .catch(this.handleError);
+  }
 
   // create event action
-  createGoal(goal: Goal): Promise<Goal> {
-    // set the content type so lumen knows how to translate the content body
-    const HEADERS = new Headers({ 'x-access-token': 'application/json' });
-    const OPTIONS = new RequestOptions({ headers: HEADERS });
-
-    // post the event to the api
-    return this.http.post( `${this.eventApiUrl}/event`, JSON.stringify(goal), OPTIONS )
+  save(goal: Goal): Promise<Goal> {
+    return this.http.post( `${this.goalApiUrl}`, JSON.stringify(goal), this.reqOptions )
                     .toPromise()
                     .then(response => {
                       return response.json() as Goal
                     })
                     .catch(this.handleError);
+  }
+
+  setProgress (goal: Goal ): Promise<boolean> {
+    return this.http.put( `${this.goalApiUrl}/${goal._id}/set-progress`, {progress: goal.progress}, this.reqOptions)
+      .toPromise()
+      .then( response => {
+        if ( response.status === 204 ) {
+          return true;
+        }
+        return false;
+      });
   }
 
   // I would definitely want to handle errors better in a real world situation
