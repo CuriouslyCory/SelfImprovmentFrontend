@@ -38,7 +38,11 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor( public dialog: MdDialog, private goalService: GoalService ) { }
+  constructor( public dialog: MdDialog, private goalService: GoalService ) { 
+    goalService.goals$.subscribe(
+      goals => this.goals = goals
+    );
+  }
 
   ngOnInit() {
     this.refreshGoals();
@@ -48,15 +52,12 @@ export class HomeComponent implements OnInit {
     const DIALOGREF = this.dialog.open( GoalSettingsComponent );
     DIALOGREF.afterClosed().subscribe(result => {
       console.log(result);
-      this.refreshGoals();
+      //this.refreshGoals();
     });
   }
 
   refreshGoals(): void {
-    this.goalService.getActive()
-      .then( goals => {
-        this.goals = goals;
-      });
+    this.goalService.getActive();
   }
 
 }

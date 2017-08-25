@@ -44,6 +44,21 @@ export class GoalTrackerComponent implements OnInit {
       });
   }
 
+  // remove this goal
+  public deleteGoal (): void {
+    this.goalService.delete(this.goal)
+      .then(result => {
+        if ( result !== true ) {
+          console.log('there was an error deleting this goal');
+        }
+      });
+  }
+
+  // update this goal
+  public openSettings (): void {
+    
+  }
+
   // calulate the current percentage complete
   public percentComplete ( asString = true): string | number {
     if ( asString ) {

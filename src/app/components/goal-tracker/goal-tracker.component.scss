@@ -6,11 +6,7 @@
 	border: 1px solid #DDDDDD;
 	border-radius: 3px;
 	box-shadow: 1px 1px 5px #DDDDDD;
-	
-	.gt-top {
-		min-height: 3em;
-	}
-	
+
 	.gt-bottom {
 		height: auto;
 	}
@@ -35,10 +31,18 @@
 	
 	.gt-top {
 		position: relative;
+		min-height: 3em;
 		
 		.gt-title {
 			position: absolute;
 			z-index: 10;
+			overflow: hidden;
+		}
+		
+		.gt-settings {
+			position: absolute;
+			right: 0;
+			border: 0;
 		}
 		
 		.progress-indicator {

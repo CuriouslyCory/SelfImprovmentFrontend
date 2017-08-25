@@ -2,6 +2,19 @@
 	<div class="gt-top" layout="column" layout-align="center center" layout-fill flex>
 		<span class="gt-title">{{goal.title}}</span>
 		<div class="progress-indicator" [ngStyle]="{'width': currentPercentComplete, 'background-color': currentColor}"></div>
+		<button md-button class="gt-settings" [mdMenuTriggerFor]="goalTrackerMenu">
+			<md-icon>more_vert</md-icon>
+		</button>
+		<md-menu #goalTrackerMenu="mdMenu">
+			<button md-menu-item (click)="deleteGoal()">
+				<md-icon>delete</md-icon>
+				<span>Delete</span>
+			</button>
+			<button md-menu-item (click)="openSettings()">
+				<md-icon>settings</md-icon>
+				<span>Edit</span>
+			</button>
+		</md-menu>
 	</div>
 	<div class="gt-bottom" layout="row" layout-align="space-between end" layout-fill flex>
 		<button md-button (click)="modProgress(-1)">
