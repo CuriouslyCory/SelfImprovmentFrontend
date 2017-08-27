@@ -1,16 +1,19 @@
 // import core components
 import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import { Observable } from 'rxjs';
 
 // import dialog content for adding a new goal
 import { GoalSettingsComponent } from '../goal-settings/goal-settings.component';
 
-// import services
-import { GoalService } from '../../services/goal.service';
+// import collections
+import { Goals } from '../../../../api/server/collections/goals.collection';
+import { Tallies } from '../../../../api/server/collections/tallies.collection';
 
 // import models
-import { Goal } from '../../models/goal';
-
+import { Goal } from '../../../../api/server/models/goal';
+import { Tally } from '../../../../api/server/models/tally
+';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -38,26 +41,34 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor( public dialog: MdDialog, private goalService: GoalService ) { 
+  constructor( public dialog: MdDialog, private goalService: GoalService ) {
+    // subscribe to the goal service to watch any changes to goals.
     goalService.goals$.subscribe(
       goals => this.goals = goals
     );
   }
 
   ngOnInit() {
-    this.refreshGoals();
+    this.goals = Goals
+      .find({})
+      .mergeMap ((goals: Goal []) =>
+        Observable.combineLatest(
+          goals.map((goal: Goal) =>
+            Tallies
+              .find({goalId: goal._id})
+              .startWith ( null )
+              .map(tallies => {
+                // change to sum of all tallies
+                if (tallies) { goal.progress = 2 };
+                return chat;
+              })
+          )
+        )
+      ).zone();
   }
 
   addNew() {
     const DIALOGREF = this.dialog.open( GoalSettingsComponent );
-    DIALOGREF.afterClosed().subscribe(result => {
-      console.log(result);
-      //this.refreshGoals();
-    });
-  }
-
-  refreshGoals(): void {
-    this.goalService.getActive();
   }
 
 }

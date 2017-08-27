@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 // import models
-import { Goal } from '../models/goal';
+import { Goal } from '../../../api/server/models/goal';
 
 // import environemnt variables
 import { environment } from '../../environments/environment';
@@ -43,15 +43,18 @@ export class GoalService {
     return this.http.post( `${this.goalApiUrl}`, JSON.stringify(goal), this.reqOptions )
                     .toPromise()
                     .then(response => {
-                      this.localGoals.push(response.json() as Goal);
+                      // if there's no _id this is new push it onto the array otherwise we need to edit the existign entry
+                      if ( !goal._id ) {
+                        this.localGoals.push(response.json() as Goal);
+                      }
                       this.goals.next(this.localGoals);
                     })
                     .catch(this.handleError);
   }
 
   // set the progress level of a given goal
-  setProgress (goal: Goal ): Promise<boolean> {
-    return this.http.put( `${this.goalApiUrl}/${goal._id}/set-progress`, {progress: goal.progress}, this.reqOptions)
+  tally (goal: Goal, tally ): Promise<boolean> {
+    return this.http.post( `${this.goalApiUrl}/${goal._id}/tally`, {tally: tally}, this.reqOptions)
       .toPromise()
       .then( response => {
         if ( response.status === 204 ) {

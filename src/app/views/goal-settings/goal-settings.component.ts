@@ -2,11 +2,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 
-// import services
-import { GoalService } from '../../services/goal.service';
+// import collections
+import { Goals } from '../../../../api/server/collections/goals.collection';
 
 // import models
-import { Goal } from '../../models/goal';
+import { Goal } from '../../../../api/server/models/goal';
 
 @Component({
   selector: 'app-goal-settings',

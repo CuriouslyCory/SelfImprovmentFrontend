@@ -1,11 +1,15 @@
 // import core components
 import { Component, Input, OnInit } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 // import models
-import { Goal } from '../../models/goal';
+import { Goal } from '../../../../api/server/models/goal';
 
 // import services
 import { GoalService } from '../../services/goal.service';
+
+// import dialog content for adding a new goal
+import { GoalSettingsComponent } from '../../views/goal-settings/goal-settings.component';
 
 @Component({
   selector: 'si-goal-tracker',
@@ -18,7 +22,7 @@ export class GoalTrackerComponent implements OnInit {
   currentColor: string;
   currentPercentComplete: string | number;
 
-  constructor( private goalService: GoalService ) { }
+  constructor( private goalService: GoalService, public dialog: MdDialog ) { }
 
   ngOnInit(): void {
     // set the current color and percentage
@@ -36,7 +40,7 @@ export class GoalTrackerComponent implements OnInit {
     this.currentColor = this.colorStatus();
     this.currentPercentComplete = this.percentComplete();
 
-    this.goalService.setProgress(this.goal)
+    this.goalService.tally(this.goal, i)
       .then( result => {
         if ( result !== true ) {
           console.log('there was an error saving progress');
@@ -52,11 +56,18 @@ export class GoalTrackerComponent implements OnInit {
           console.log('there was an error deleting this goal');
         }
       });
+
+//    removeChat(chat: Chat): void {
+//    Chats.remove({_id: chat._id}).subscribe(() => {
+//    });
+//  }
   }
 
   // update this goal
   public openSettings (): void {
-    
+    const DIALOGREF = this.dialog.open( GoalSettingsComponent );
+    let instance = DIALOGREF.componentInstance;
+    instance.goal = this.goal;
   }
 
   // calulate the current percentage complete
