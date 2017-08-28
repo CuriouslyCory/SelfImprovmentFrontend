@@ -1,0 +1,28 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="openPage(homePage)">
+        <ion-icon name="home"></ion-icon> Home
+      </button>
+      <button ion-item (click)="openPage(friendsPage)">
+        <ion-icon name="podium"></ion-icon> Statistics
+      </button>
+      <button ion-item (click)="openPage(eventsPage)">
+        <ion-icon name="settings"></ion-icon> Settings
+      </button>
+      <button ion-item (click)="logout()">
+        <ion-icon name="log-out"></ion-icon> Logout
+      </button>
+      <button ion-item menuClose>
+        Close Menu
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"></ion-nav>

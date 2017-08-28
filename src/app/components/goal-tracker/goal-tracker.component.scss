@@ -1,0 +1,46 @@
+#gt-wrapper {
+	width: 100%;
+	margin: 1em 0;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px;
+	box-shadow: 1px 1px 5px #DDDDDD;
+	overflow: hidden;
+	
+	.gt-progress {
+		height: 2em;
+		width: 100%;
+		text-align: center;
+		display: inline-block;
+	}
+	
+	.gt-top {
+		position: relative;
+		min-height: 2em;
+		
+		.gt-title {
+			position: relative;
+			z-index: 10;
+			overflow: hidden;
+			width: 100%;
+			text-align: center;
+		}
+		
+		.gt-settings {
+			position: absolute;
+			right: 0;
+			border: 0;
+			z-index: 10;
+		}
+		
+		.progress-indicator {
+			height: 2em;
+			background-color: #4CAF50;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 100%;
+			transition: width 0.25s ease-out;
+		}
+	}
+	
+}

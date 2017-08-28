@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Menus
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content class="home-page-content">
+  <ion-card>
+  	<ion-card-content>
+  		<si-goal-tracker [goal]="goal" *ngFor="let goal of goals | async"></si-goal-tracker>
+  	</ion-card-content>
+  </ion-card>
+</ion-content>
