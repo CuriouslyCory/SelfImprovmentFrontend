@@ -1,35 +1,35 @@
 #gt-wrapper {
 	width: 100%;
 	margin: 1em 0;
-	border: 1px solid #DDDDDD;
-	border-radius: 3px;
-	box-shadow: 1px 1px 5px #DDDDDD;
+
 	overflow: hidden;
 	
 	.gt-progress {
-		height: 2em;
-		width: 100%;
 		text-align: center;
 		display: inline-block;
 	}
 	
+	.right-button-col {
+		text-align: right;
+	}
+	
 	.gt-top {
 		position: relative;
-		min-height: 2em;
 		
 		.gt-title {
 			position: relative;
-			z-index: 10;
 			overflow: hidden;
 			width: 100%;
 			text-align: center;
+			font-weight: bold;
+			padding: 0 0 0 5px;
+			color: #575757;
 		}
 		
 		.gt-settings {
 			position: absolute;
 			right: 0;
-			border: 0;
-			z-index: 10;
+			top: -0.8em;
 		}
 		
 		.progress-indicator {
@@ -40,7 +40,33 @@
 			left: 0;
 			height: 100%;
 			transition: width 0.25s ease-out;
+			overflow: hidden;
+			
+			.gt-title {
+				color: white;
+				display: block;
+				height: 2em;
+				overflow: hidden;
+				text-align: left;	
+				white-space: pre;
+			}
 		}
 	}
+	
+	.gt-bottom {
+		.gt-middle {
+			text-align: center;
+			div {
+				margin: auto;
+				width: auto;
+			}
+			span { 
+				font-size: 1.25em;
+				padding: 3px 0 0 0;
+				margin: auto 0;
+				display: inline-block;
+			}
+		}
+	}	
 	
 }

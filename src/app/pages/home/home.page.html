@@ -1,10 +1,10 @@
-<ion-header>
-  <ion-navbar>
+<ion-header >
+  <ion-navbar color="primary">
     <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
     </button>
     <ion-title>
-      Menus
+      Home
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -14,5 +14,10 @@
   	<ion-card-content>
   		<si-goal-tracker [goal]="goal" *ngFor="let goal of goals | async"></si-goal-tracker>
   	</ion-card-content>
+  	<ion-fab>
+	  	<button ion-fab mini color="secondary">
+	  		<ion-icon name="add"></ion-icon>
+	  	</button>
+	  </ion-fab>
   </ion-card>
 </ion-content>

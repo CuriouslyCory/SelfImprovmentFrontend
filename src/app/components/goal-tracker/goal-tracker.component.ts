@@ -49,28 +49,6 @@ export class GoalTrackerComponent implements OnInit {
 //      });
   }
 
-  // remove this goal
-  public deleteGoal (): void {
-//    this.goalService.delete(this.goal)
-//      .then(result => {
-//        if ( result !== true ) {
-//          console.log('there was an error deleting this goal');
-//        }
-//      });
-
-//    removeChat(chat: Chat): void {
-//    Chats.remove({_id: chat._id}).subscribe(() => {
-//    });
-//  }
-  }
-
-  // update this goal
-  public openSettings (): void {
-//    const DIALOGREF = this.dialog.open( GoalSettingsComponent );
-//    let instance = DIALOGREF.componentInstance;
-//    instance.goal = this.goal;
-  }
-
   // calulate the current percentage complete
   public percentComplete ( asString = true): string | number {
     if ( asString ) {
@@ -85,7 +63,7 @@ export class GoalTrackerComponent implements OnInit {
     const PROGRESSNUM = this.goal.progress / this.goal.target;
     if ( this.goal.direction === 'max' ) {
       if ( PROGRESSNUM < 0.5 ) {
-        return '#4CAF50';
+        return '#43a047';
       } else if ( PROGRESSNUM >= 0.50 && PROGRESSNUM < 1) {
         return '#FFC107';
       } else if ( PROGRESSNUM >= 1) {
@@ -97,13 +75,13 @@ export class GoalTrackerComponent implements OnInit {
       } else if ( PROGRESSNUM < 1 && PROGRESSNUM > 0.25) {
         return '#FFC107';
       } else if ( PROGRESSNUM >= 1 ) {
-        return '#4CAF50';
+        return '#43a047';
       }
     }
   }
   
   public optionsMenu(myEvent) { 
-    let popover = this.popoverCtrl.create(GoalTrackerOptionMenu);
+    let popover = this.popoverCtrl.create(GoalTrackerOptionMenu, {goal : this.goal});
     popover.present({
       ev: myEvent
     });

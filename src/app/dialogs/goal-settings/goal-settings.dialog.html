@@ -1,0 +1,46 @@
+<ion-header >
+  <ion-navbar color="primary">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Goal Details
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="goal-settings-content">
+	<section>
+		<ion-list>
+			<ion-item>
+				<h1>Describe your goal</h1>
+			</ion-item>
+			<ion-item >
+				<span>I Want to...</span>
+				<ion-label color="primary" floating>Name your habit</ion-label>
+				<ion-input [(ngModel)]="goal.title"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label float>more or less</ion-label>
+				<ion-select [(ngModel)]="goal.direction" name="direction">
+					<ion-option value="min">... a minimum of...</ion-option>
+					<ion-option value="max">... a maximum of...</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item>
+				<ion-label float>times</ion-label>
+				<ion-input [(ngModel)]="goal.target" name="target"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label float>per</ion-label>
+				<ion-select class="input-full-width" [(ngModel)]="goal.recurrence" name="recurrence">
+					<ion-option value="day">day</ion-option>
+					<ion-option value="week">week</ion-option>
+					<ion-option value="month">month</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item>
+				<button ion-button (click)="save()" >Save</button><button ion-button (click)="cancel()" >Cancel</button>
+			</ion-item>
+		</ion-list>
+	</section>
+</ion-content>

@@ -9,13 +9,15 @@ import { HomePage } from './pages/home/home.page';
 
 import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.component';
 import { GoalTrackerOptionMenu } from './components/goal-tracker/goal-tracker.option.menu';
+import { GoalSettingsDialog } from './dialogs/goal-settings/goal-settings.dialog';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     GoalTrackerComponent,
-    GoalTrackerOptionMenu
+    GoalTrackerOptionMenu,
+    GoalSettingsDialog
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { GoalTrackerOptionMenu } from './components/goal-tracker/goal-tracker.op
   entryComponents: [
     MyApp,
     HomePage,
-    GoalTrackerOptionMenu
+    GoalTrackerOptionMenu,
+    GoalSettingsDialog
   ],
   providers: [
     StatusBar,

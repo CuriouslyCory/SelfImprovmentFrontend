@@ -1,24 +1,28 @@
-<ion-grid id="gt-wrapper">
+<ion-grid id="gt-wrapper" no-padding>
 	<ion-row class="gt-top" align-items-center>
 		<ion-col>
 			<span class="gt-title">{{goal.title}}</span>
-			<div class="progress-indicator" [ngStyle]="{'width': currentPercentComplete, 'background-color': currentColor}"></div>
-			<button ion-button icon-only class="gt-settings" (click)="optionsMenu($event)">
+			<div class="progress-indicator" [ngStyle]="{'width': currentPercentComplete, 'background-color': currentColor}">
+				<span class="gt-title">{{goal.title}}</span>
+			</div>
+			<button ion-button clear icon-only class="gt-settings" (click)="optionsMenu($event)">
 				<ion-icon name="more"></ion-icon>
 			</button>
 		</ion-col>
 	</ion-row>
 	<ion-row class="gt-bottom">
 		<ion-col class="left-button-col">
-			<button ion-button icon-only (click)="modProgress(-1)">
+			<button ion-button outline icon-only (click)="modProgress(-1)" color="secondary">
 				<ion-icon name="remove"></ion-icon>
 			</button>
 		</ion-col>
-		<ion-col col-6>
-			<span class="gt-progress">{{goal.progress}} / {{goal.target}}</span>
+		<ion-col col-6 class="gt-middle">
+			<div>
+				<span class="gt-progress" margin-vertical >{{goal.progress}} / {{goal.target}}</span>
+			</div>
 		</ion-col>
 		<ion-col class="right-button-col">
-			<button ion-button icon-only (click)="modProgress(1)">
+			<button ion-button outline icon-only (click)="modProgress(1)" color="secondary">
 				<ion-icon name="add"></ion-icon>
 			</button>
 		</ion-col>
