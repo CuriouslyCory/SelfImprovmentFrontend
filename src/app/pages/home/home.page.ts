@@ -1,64 +1,35 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { MeteorObservable } from 'meteor-rxjs';
 
-import { Goal } from '../../models/goal';
+import { Goals } from 'api/collections/goals.collection';
+import { Tallies } from 'api/collections/tallies.collection';
+
+import { Goal } from 'api/models/goal';
  
 @Component({
   templateUrl: 'home.page.html'
 })
-export class HomePage {
+export class HomePage implements OnInit{
   
-  goals: Observable<any[]>;
+  goals: any;
   
-  constructor() {
-    this.goals = this.fetchGoals();
+  constructor( ) {
+    
   }
   
-  private fetchGoals() {
-    return Observable.of([
-      {
-        _id: '0',
-        active: 1,
-        title: 'Drink More Water',
-        direction: 'min',
-        progress: 1,
-        target: 8,
-        recurrence: 'day',
-        tallies: [
-          { _id:0, goalId: 0, value: 1 },
-          { _id:1, goalId: 0, value: 1 },
-          { _id:2, goalId: 0, value: -1 }
-        ]
-        
-      },
-      {
-        _id: '1',
-        active: 1,
-        title: 'Drink Lesss Booze',
-        direction: 'max',
-        progress: 1,
-        target: 8,
-        recurrence: 'week',
-        tallies: [
-          { _id:0, goalId: 0, value: 1 },
-          { _id:1, goalId: 0, value: 1 },
-          { _id:2, goalId: 0, value: 1 }
-        ]
-        
-      },
-      {
-        _id: '2',
-        active: 1,
-        title: 'Meditate',
-        direction: 'min',
-        progress: 1,
-        target: 1,
-        recurrence: 'day',
-        tallies: [
-          { _id:0, goalId: 0, value: 1 }
-        ]
-      },
-    ]);
+  ngOnInit() {
+    MeteorObservable.subscribe('goals').subscribe(() => {
+      MeteorObservable.autorun().subscribe(() => {
+        this.goals = this.findGoals();
+      });
+    });
   }
+  
+  findGoals() {
+    return Goals.find().map(goals => {
+      return goals;
+    });
+  }
+ 
 }

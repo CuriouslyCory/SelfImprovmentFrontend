@@ -6,7 +6,7 @@ import { NavParams, ViewController } from 'ionic-angular';
 //import { Goals } from '../../../../../api/server/collections/goals.collection';
 
 // import models
-import { Goal } from '../../models/goal';
+import { Goal } from 'api/models/goal';
 
 @Component({
   selector: 'app-goal-settings',
@@ -23,10 +23,9 @@ export class GoalSettingsDialog implements OnInit {
   ngOnInit() {
     
     this.originalGoal = this.params.get('goal');
-    this.goal = new Goal();
+    this.goal = {} as Goal;
     if ( this.originalGoal ) {
       // clone the current settings in case we want to cancel
-      this.goal = new Goal();
       this.goal._id = this.originalGoal._id;
       this.goal.title = this.originalGoal.title;
       this.goal.target = this.originalGoal.target;

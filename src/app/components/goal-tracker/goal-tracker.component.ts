@@ -8,7 +8,7 @@ import { GoalTrackerOptionMenu } from './goal-tracker.option.menu';
 
 
 // import models
-import { Goal } from '../../models/goal';
+import { Goal } from 'api/models/goal';
 
 // import dialog content for adding a new goal
 //import { GoalSettingsComponent } from '../../views/goal-settings/goal-settings.component';
@@ -29,15 +29,17 @@ export class GoalTrackerComponent implements OnInit {
     // set the current color and percentage
     this.currentColor = this.colorStatus();
     this.currentPercentComplete = this.percentComplete();
+
+    console.log(this.goal.progress);
   }
 
   // add one to the goal progrss
   public modProgress ( i ): void {
-    if ( this.goal.progress + i < 0 ) {
-      return;
-    }
-
-    this.goal.progress += i;
+//    if ( this.goal.progress + i < 0 ) {
+//      return;
+//    }
+//
+//    this.goal.progress += i;
     this.currentColor = this.colorStatus();
     this.currentPercentComplete = this.percentComplete();
 

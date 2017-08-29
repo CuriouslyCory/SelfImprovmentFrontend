@@ -7,7 +7,8 @@
     "experimentalDecorators": true,
     "lib": [
       "dom",
-      "es2015"
+      "es2015",
+      "es6"
     ],
     "module": "es2015",
     "moduleResolution": "node",
@@ -20,8 +21,8 @@
     "stripInternal": true,
     "noImplicitAny": false,
     "types": [
-      "meteor-typings",
-      "@types/underscore"
+      "@types/underscore",
+      "@types/meteor-accounts-phone"
     ]
   },
   "include": [

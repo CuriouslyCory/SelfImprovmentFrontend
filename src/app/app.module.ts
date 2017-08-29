@@ -11,6 +11,8 @@ import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.com
 import { GoalTrackerOptionMenu } from './components/goal-tracker/goal-tracker.option.menu';
 import { GoalSettingsDialog } from './dialogs/goal-settings/goal-settings.dialog';
 
+import { GoalService } from './services/goal.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -31,6 +33,7 @@ import { GoalSettingsDialog } from './dialogs/goal-settings/goal-settings.dialog
     GoalSettingsDialog
   ],
   providers: [
+    GoalService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

@@ -3,7 +3,7 @@ import { ModalController, NavParams, ViewController } from 'ionic-angular';
 
 import { GoalSettingsDialog } from '../../dialogs/goal-settings/goal-settings.dialog';
 
-import { Goal } from '../../models/goal';
+import { Goal } from 'api/models/goal';
 
 @Component({
   template: `
