@@ -11,7 +11,7 @@ Meteor["publishComposite"]('goals', function() {
 
   return {
     find: () => {
-      return Goals.collection.find({ });
+      return Goals.collection.find({ userId: this.userId});
     },
 
 //    children: [

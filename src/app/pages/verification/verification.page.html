@@ -1,0 +1,21 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Verification</ion-title>
+		
+		<ion-buttons end>
+			<button ion-button class="verify-button" (click)="verify()">Verify</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="instructions">
+		<div>An SMS message with the verification code has been sent to {{phone}}.</div>
+		
+		<div>To proceed, please enter the 4-digit verification code bleow.</div>
+	</div>
+	
+	<ion-item>
+		<ion-input [(ngModel)]="code" (keypress)="onInputKeypress($event)" type="tel" placeholder="Your verification code"></ion-input>
+	</ion-item>	
+</ion-content>

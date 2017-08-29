@@ -1,0 +1,23 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Login</ion-title>
+		<ion-buttons end>
+			<button ion-button class="done-button" (click)="login()">Done</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="instructions">
+		<div>
+			Please enter you phone number including its country code (+1 for United States).
+		</div>
+		<div>
+			You will recieve a one time SMS message to verify your phonenumber. Standard SMS rates and charges may apply where applicable. 
+		</div>
+	</div>
+	
+	<ion-item>
+		<ion-input [(ngModel)]="phone" (keypress)="onInputKeypress($event)" type="tel" placeholder="Your phone number"></ion-input>
+	</ion-item>
+</ion-content>	

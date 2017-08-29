@@ -1,7 +1,5 @@
-export interface User {
-  _id?: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  password?: string;
+import { Profile } from './profile';
+
+export interface User extends Meteor.User {
+  profile?: Profile;
 }

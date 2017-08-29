@@ -5,13 +5,22 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from './pages/home/home.page';
 
+// import pages
+import { HomePage } from './pages/home/home.page';
+import { LoginPage } from './pages/login/login.page';
+import { ProfilePage } from './pages/profile/profile.page';
+import { VerificationPage } from './pages/verification/verification.page';
+
+// import reusables
 import { GoalTrackerComponent } from './components/goal-tracker/goal-tracker.component';
 import { GoalTrackerOptionMenu } from './components/goal-tracker/goal-tracker.option.menu';
 import { GoalSettingsDialog } from './dialogs/goal-settings/goal-settings.dialog';
 
+// import services
 import { GoalService } from './services/goal.service';
+import { PhoneService } from './services/phone.service';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +28,10 @@ import { GoalService } from './services/goal.service';
     HomePage,
     GoalTrackerComponent,
     GoalTrackerOptionMenu,
-    GoalSettingsDialog
+    GoalSettingsDialog,
+    LoginPage,
+    ProfilePage,
+    VerificationPage
   ],
   imports: [
     BrowserModule,
@@ -28,12 +40,16 @@ import { GoalService } from './services/goal.service';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     GoalTrackerOptionMenu,
-    GoalSettingsDialog
+    GoalSettingsDialog,
+    HomePage,
+    LoginPage,
+    ProfilePage,
+    VerificationPage
   ],
   providers: [
     GoalService,
+    PhoneService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

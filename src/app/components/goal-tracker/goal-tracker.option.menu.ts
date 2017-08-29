@@ -3,6 +3,7 @@ import { ModalController, NavParams, ViewController } from 'ionic-angular';
 
 import { GoalSettingsDialog } from '../../dialogs/goal-settings/goal-settings.dialog';
 
+import { Goals } from 'api/collections';
 import { Goal } from 'api/models/goal';
 
 @Component({
@@ -18,7 +19,11 @@ import { Goal } from 'api/models/goal';
 export class GoalTrackerOptionMenu {
   private goal: Goal;
   
-  constructor(public viewCtrl: ViewController, public modalCtrl: ModalController, private params: NavParams) {}
+  constructor(
+    public viewCtrl: ViewController,
+    public modalCtrl: ModalController,
+    private params: NavParams
+  ) {}
   
   ngOnInit () { 
     this.goal = this.params.data.goal;

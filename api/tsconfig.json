@@ -6,8 +6,7 @@
     "experimentalDecorators": true,
     "lib": [
       "dom",
-      "es2015",
-      "es6"
+      "es2015"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -17,7 +16,10 @@
     "stripInternal": true,
     "noImplicitAny": false,
     "types": [
-      "meteor-typings"
+      "meteor-typings",
+      "@types/meteor-accounts-phone",
+      "@types/meteor-publish-composite",
+      "@types/meteor-collection-hooks"
     ]
   },
   "exclude": [

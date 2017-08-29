@@ -1,9 +1,9 @@
 // import core libraries
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
-
+import { NavParams, ViewController, AlertController } from 'ionic-angular';
+import { MeteorObservable } from 'meteor-rxjs';
 // import collections
-//import { Goals } from '../../../../../api/server/collections/goals.collection';
+import { Goals } from 'api/server/collections';
 
 // import models
 import { Goal } from 'api/models/goal';
@@ -18,7 +18,11 @@ export class GoalSettingsDialog implements OnInit {
   private originalGoal: Goal;
   public goal: Goal;
 
-  constructor( private params: NavParams, public viewCtrl: ViewController ) { }
+  constructor( 
+    private params: NavParams,
+    public viewCtrl: ViewController,
+    private alertCtrl: AlertController
+  ) { }
 
   ngOnInit() {
     
@@ -38,20 +42,32 @@ export class GoalSettingsDialog implements OnInit {
     console.log(this.goal);
   }
 
-  save() {
-    if (!this.currentlySaving) {
-      this.currentlySaving = true
-//      this.goalService.save(this.goal)
-//        .then(result => {
-//          this.dialogRef.close();
-//          this.currentlySaving = false;
-//        });
-    }
-    this.viewCtrl.dismiss();
+  save(): void {
+    MeteorObservable.call('upsertGoal', this.goal).subscribe({
+      next: () => {
+        this.viewCtrl.dismiss();
+      },
+      error: (e: Error) => {
+        this.handleError(e);
+      }
+    });
+    
   }
   
   cancel() {
     this.viewCtrl.dismiss();
+  }
+  
+  handleError (e: Error): void {
+    console.error(e);
+    
+    const alert = this.alertCtrl.create({
+      title: 'Oops!',
+      message: e.message,
+      buttons: ["Ok"]
+    });
+    
+    alert.present();
   }
 
 }

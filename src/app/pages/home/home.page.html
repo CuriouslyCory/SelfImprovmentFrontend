@@ -12,12 +12,12 @@
 <ion-content class="home-page-content">
   <ion-card>
   	<ion-card-content>
+  		<h1>My Goals</h1>
   		<si-goal-tracker [goal]="goal" *ngFor="let goal of goals | async"></si-goal-tracker>
   	</ion-card-content>
-  	<ion-fab>
-	  	<button ion-fab mini color="secondary">
-	  		<ion-icon name="add"></ion-icon>
-	  	</button>
-	  </ion-fab>
+
+  	<button ion-button clear color="secondary" class="add-goal-button" (click)="openGoalSettings()">
+  		<ion-icon name="add"></ion-icon>
+  	</button>
   </ion-card>
 </ion-content>

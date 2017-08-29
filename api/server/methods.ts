@@ -1,7 +1,8 @@
-import { Goals } from './collections/goals.collection';
-import { Tallies } from './collections/tallies.collection';
-import { Tally } from './models/tally';
+import { Goals, Tallies } from './collections';
+import { Goal, Tally } from './models';
+import { Profile } from './models/profile';
 import { check, Match } from 'meteor/check';
+
  
  
 const nonEmptyString = Match.Where((str) => {
@@ -9,35 +10,42 @@ const nonEmptyString = Match.Where((str) => {
   return str.length > 0;
 });
  
-Meteor.methods({
-//  addMessage(type: MessageType, chatId: string, content: string) {
-//    check(type, Match.OneOf(String, [ MessageType.TEXT ]));
-//    check(chatId, nonEmptyString);
-//    check(content, nonEmptyString);    
-//  
-//    const chatExists = !!Chats.collection.find(chatId).count();
-// 
-//    if (!chatExists) {
-//      throw new Meteor.Error('chat-not-exists',
-//        'Chat doesn\'t exist');
-//    }
-// 
-//    return {
-//      messageId: Messages.collection.insert({
-//        chatId: chatId,
-//        content: content,
-//        createdAt: new Date(),
-//        type: type
-//      })
-//    };
-//  }
-  
+Meteor.methods({  
   addTally(goalId: string, value: number) {
+    // todo: Validate that the goal is owned by the registered user
+    if ( !this.userId ) {
+      throw new Meteor.Error('unauthorized', 'User must be logged in to log progress');
+    }
+    
     return {
       tallyId: Tallies.collection.insert({
         goalId: goalId,
         value: value
       })
     };
+  },
+  
+  updateProfile (profile: Profile): void {
+    if ( !this.userId ) {
+      throw new Meteor.Error('unauthorized', 'User must be logged in to update their profile');
+    }
+    
+    check(profile, {
+      name: nonEmptyString
+    });
+    
+    Meteor.users.update(this.userId, {
+      $set: {profile}
+    })
+  },
+  
+  upsertGoal (goal: Goal){
+    if ( !this.userId ) {
+      throw new Meteor.Error('unauthorized', 'User must be logged in to update their profile');
+    }
+    
+    goal.userId = this.userId;
+    
+    return {goalId: Goals.collection.upsert({_id: goal._id}, goal)};
   }
 });
