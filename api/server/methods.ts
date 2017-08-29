@@ -1,7 +1,8 @@
-import { Goals } from './collections/chats';
-import { Tallies } from './collections/messages';
+import { Goals } from './collections/goals.collection';
+import { Tallies } from './collections/tallies.collection';
 import { Tally } from './models/tally';
 import { check, Match } from 'meteor/check';
+ 
  
 const nonEmptyString = Match.Where((str) => {
   check(str, String);
@@ -30,4 +31,13 @@ Meteor.methods({
 //      })
 //    };
 //  }
+  
+  addTally(goalId: string, value: number) {
+    return {
+      tallyId: Tallies.collection.insert({
+        goalId: goalId,
+        value: value
+      })
+    };
+  }
 });

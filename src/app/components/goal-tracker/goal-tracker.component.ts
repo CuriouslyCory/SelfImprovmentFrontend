@@ -1,7 +1,7 @@
 // import core components
 import { Component, Input, OnInit } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
-
+import { MeteorObservable } from 'meteor-rxjs';
 
 // import the option menu
 import { GoalTrackerOptionMenu } from './goal-tracker.option.menu';
@@ -40,15 +40,17 @@ export class GoalTrackerComponent implements OnInit {
 //    }
 //
 //    this.goal.progress += i;
-    this.currentColor = this.colorStatus();
-    this.currentPercentComplete = this.percentComplete();
+    
+    MeteorObservable.call('addTally', this.goal._id, i).subscribe({
+      next: () => {
+        this.currentColor = this.colorStatus();
+        this.currentPercentComplete = this.percentComplete();
+      },
+      error: (e: Error) => {
+        console.log(e);
+      }
+    });
 
-//    this.goalService.tally(this.goal, i)
-//      .then( result => {
-//        if ( result !== true ) {
-//          console.log('there was an error saving progress');
-//        }
-//      });
   }
 
   // calulate the current percentage complete
