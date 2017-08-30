@@ -2,10 +2,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
+import * as moment from 'moment';
 
 // import the option menu
 import { GoalTrackerOptionMenu } from './goal-tracker.option.menu';
-
 
 // import models
 import { Goal } from 'api/models/goal';
@@ -22,6 +22,7 @@ export class GoalTrackerComponent implements OnInit {
   @Input() goal: Goal;
   currentColor: string;
   currentPercentComplete: string | number;
+  pacePercent: string;
 
   constructor( public popoverCtrl: PopoverController ) { }
 
@@ -31,6 +32,8 @@ export class GoalTrackerComponent implements OnInit {
     this.currentPercentComplete = this.percentComplete();
 
     console.log(this.goal.progress);
+    
+    this.setPacePercent();
   }
 
   // add one to the goal progrss
@@ -90,6 +93,20 @@ export class GoalTrackerComponent implements OnInit {
     popover.present({
       ev: myEvent
     });
+  }
+  
+  private setPacePercent () {
+    if(this.goal.recurrence === 'day'){
+      let hour = parseInt(moment().format('H'));
+      this.pacePercent = Math.floor(hour / 24 * 100) + "%";
+    }else if(this.goal.recurrence === 'week'){
+      let dayOfWeek = parseInt(moment().format('e')) + 1;
+      this.pacePercent = Math.floor(dayOfWeek / 7 * 100) + "%";
+    }else if(this.goal.recurrence === 'month'){
+      let day = parseInt(moment().format('D'));
+      let totalDays = moment().daysInMonth();
+      this.pacePercent = Math.floor(day / totalDays * 100) + "%";
+    }
   }
 
 }

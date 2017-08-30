@@ -25248,6 +25248,7 @@ ion-menu button ion-icon {
   -webkit-transition: width 0.25s ease-out;
   transition: width 0.25s ease-out;
   overflow: hidden;
+  border-radius: 5px;
 }
 
 #gt-wrapper .gt-top .progress-indicator .gt-title {
@@ -25257,6 +25258,15 @@ ion-menu button ion-icon {
   overflow: hidden;
   text-align: left;
   white-space: pre;
+  z-index: 10;
+}
+
+#gt-wrapper .gt-top .ideal-pace {
+  height: 2.25em;
+  background-color: red;
+  width: 1px;
+  position: absolute;
+  bottom: 0;
 }
 
 #gt-wrapper .gt-bottom .gt-middle {

@@ -5,6 +5,7 @@
 			<div class="progress-indicator" [ngStyle]="{'width': currentPercentComplete, 'background-color': currentColor}">
 				<span class="gt-title">{{goal.title}}</span>
 			</div>
+			<div class="ideal-pace" [ngStyle]="{'left': pacePercent}"></div>
 			<button ion-button clear icon-only class="gt-settings" (click)="optionsMenu($event)">
 				<ion-icon name="more"></ion-icon>
 			</button>
