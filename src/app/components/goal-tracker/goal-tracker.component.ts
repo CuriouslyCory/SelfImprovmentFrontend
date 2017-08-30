@@ -28,12 +28,10 @@ export class GoalTrackerComponent implements OnInit {
 
   ngOnInit(): void {
     // set the current color and percentage
+    this.setPacePercent();
     this.currentColor = this.colorStatus();
     this.currentPercentComplete = this.percentComplete();
-
     console.log(this.goal.progress);
-    
-    this.setPacePercent();
   }
 
   // add one to the goal progrss
@@ -68,22 +66,27 @@ export class GoalTrackerComponent implements OnInit {
 
   // returns the appropriate color string depending on the warn level
   public colorStatus(): string {
-    const PROGRESSNUM = this.goal.progress / this.goal.target;
+    let progress = +this.percentComplete(false);
+    let pacePercent = parseInt(this.pacePercent)
+    let distFromPace = pacePercent - progress;
+
     if ( this.goal.direction === 'max' ) {
-      if ( PROGRESSNUM < 0.5 ) {
-        return '#43a047';
-      } else if ( PROGRESSNUM >= 0.50 && PROGRESSNUM < 1) {
-        return '#FFC107';
-      } else if ( PROGRESSNUM >= 1) {
-        return '#F44336';
+      // green is on the left of the progress line, red on the right
+      if ( distFromPace > 0 ) { 
+        return '#43a047'; // green
+      } else if ( distFromPace == 0 ) { //> 100 is not possible, no red
+        return '#FFC107'; // yellow
+      } else if ( distFromPace < 0) {
+        return '#F44336'; // red
       }
     } else if (this.goal.direction === 'min' ) {
-      if ( PROGRESSNUM <= 0.25 ) {
-      return '#F44336';
-      } else if ( PROGRESSNUM < 1 && PROGRESSNUM > 0.25) {
-        return '#FFC107';
-      } else if ( PROGRESSNUM >= 1 ) {
-        return '#43a047';
+      
+      if ( distFromPace >= 20 ) {
+        return '#F44336'; //red
+      } else if ( distFromPace > 0 && distFromPace < 20) { //less than the line, but within spittin distance
+        return '#FFC107'; // yellow 
+      } else if ( distFromPace <= 0 ) {  //on the line or better
+        return '#43a047'; // green
       }
     }
   }

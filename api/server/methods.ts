@@ -44,6 +44,10 @@ Meteor.methods({
       throw new Meteor.Error('unauthorized', 'User must be logged in to update their profile');
     }
     
+//    check(goal, {
+//      title: nonEmptyString
+//    });
+    
     goal.userId = this.userId;
     
     return {goalId: Goals.collection.upsert({_id: goal._id}, goal)};
@@ -54,8 +58,11 @@ Meteor.methods({
       throw new Meteor.Error('unauthorized', 'User must be logged in to update their profile');
     }
     
+//    check(goal, { _id: nonEmptyString });
+    
     // remove goal where id matches the goal passed in AND the goal belongs to the user.
     Goals.collection.remove({_id: goal._id, userId: this.userId});
+    Tallies.collection.remove({goalId: goal._id});
     
   }
 });
