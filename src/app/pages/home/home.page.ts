@@ -4,11 +4,8 @@ import * as moment from 'moment';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
 
-import { Goals } from 'api/collections/goals.collection';
-import { Tallies } from 'api/collections/tallies.collection';
-
+import { GoalService } from '../../services/goal.service';
 import { GoalSettingsDialog } from '../../dialogs/goal-settings/goal-settings.dialog';
-
 import { Goal } from 'api/models/goal';
  
 @Component({
@@ -16,23 +13,16 @@ import { Goal } from 'api/models/goal';
 })
 export class HomePage implements OnInit{
   
-  goals: any;
+  goals: Observable<Goal[]>;
   
-  constructor( private modalCtrl: ModalController ) {
-    
-  }
+  constructor( 
+    private modalCtrl: ModalController,
+    private goalService: GoalService 
+  ) { }
   
   ngOnInit() {
-    MeteorObservable.subscribe('goals').subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
-        this.goals = this.findGoals();
-      });
-    });
-  }
-  
-  findGoals(): Observable<Goal[]> {
-    return Goals.find().map(goals => {
-      return goals;
+    MeteorObservable.autorun().subscribe(() => {
+      this.goals = this.goalService.findGoals();
     });
   }
   

@@ -43,6 +43,7 @@ export class GoalTrackerComponent implements OnInit {
     
     MeteorObservable.call('addTally', this.goal._id, i).subscribe({
       next: () => {
+        console.log('add tally success');
         this.currentColor = this.colorStatus();
         this.currentPercentComplete = this.percentComplete();
       },

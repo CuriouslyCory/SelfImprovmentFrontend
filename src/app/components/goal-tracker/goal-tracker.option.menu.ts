@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, NavParams, ViewController } from 'ionic-angular';
+import { MeteorObservable } from 'meteor-rxjs';
 
 import { GoalSettingsDialog } from '../../dialogs/goal-settings/goal-settings.dialog';
 
@@ -36,7 +37,16 @@ export class GoalTrackerOptionMenu {
   }
   
   public deleteGoal () {
-    this.viewCtrl.dismiss();
+    MeteorObservable.call('deleteGoal', this.goal).subscribe({
+      next: () => {
+        console.log('delete goal success');
+        this.viewCtrl.dismiss();
+      },
+      error: (e: Error) => {
+        console.log(e);
+      }
+    });
+    
   }
   
   close() {

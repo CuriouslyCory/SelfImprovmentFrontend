@@ -2,7 +2,7 @@
   "name": "EmproovMe",
   "version": "0.0.1",
   "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "homepage": "http://Emproov.me/",
   "private": true,
   "scripts": {
     "api": "cd api && meteor run --settings private/settings.json",
