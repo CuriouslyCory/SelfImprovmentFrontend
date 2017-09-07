@@ -5,14 +5,14 @@
     "homepage": "http://Emproov.me/",
     "private": true,
     "scripts": {
-        "api": "cd api && export ROOT_URL=http://173.25.5.107:3000 && meteor run --settings private/settings.json",
+        "api": "cd api && export ROOT_URL=http://emproov.me && meteor run --settings private/settings.json",
         "clean": "ionic-app-scripts clean",
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve",
         "meteor-client:bundle": "meteor-client bundle -s api -c meteor-client.config.json",
-        "meteor:reset": "cd api && export ROOT_URL=http://173.25.5.107:3000 && meteor reset"
+        "meteor:reset": "cd api && export ROOT_URL=http://emproov.me && meteor reset"
     },
     "dependencies": {
         "@angular/common": "4.1.3",
