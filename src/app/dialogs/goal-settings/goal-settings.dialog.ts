@@ -8,6 +8,9 @@ import { Goals } from 'api/server/collections';
 // import models
 import { Goal } from 'api/models/goal';
 
+// import services
+import { GoalService } from '../../services/goal.service';
+
 @Component({
   selector: 'app-goal-settings',
   templateUrl: './goal-settings.dialog.html'
@@ -21,7 +24,8 @@ export class GoalSettingsDialog implements OnInit {
   constructor( 
     private params: NavParams,
     public viewCtrl: ViewController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private goalService: GoalService
   ) { }
 
   ngOnInit() {
@@ -46,6 +50,8 @@ export class GoalSettingsDialog implements OnInit {
     MeteorObservable.call('upsertGoal', this.goal).subscribe({
       next: () => {
         this.viewCtrl.dismiss();
+        // resub after add to pull new tallies into group
+        this.goalService.subscribeToPubs();
       },
       error: (e: Error) => {
         this.handleError(e);

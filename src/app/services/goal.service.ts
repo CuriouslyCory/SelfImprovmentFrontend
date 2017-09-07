@@ -11,13 +11,7 @@ export class GoalService{
   goals: any;
   
   constructor() {
-    MeteorObservable.subscribe('tallies').subscribe(() => {
-      console.log('Tallies Sub Ready');
-    });
-    
-    MeteorObservable.subscribe('goals').subscribe(() => {
-      console.log("Goals Sub Ready");
-    });
+    this.subscribeToPubs();
   }
   
   findGoals(): Observable<Goal[]> {
@@ -74,6 +68,16 @@ export class GoalService{
           }
         }); 
       });
+    });
+  }
+  
+  subscribeToPubs() {
+    MeteorObservable.subscribe('tallies').subscribe(() => {
+      console.log('Tallies Sub Ready');
+    });
+    
+    MeteorObservable.subscribe('goals').subscribe(() => {
+      console.log("Goals Sub Ready");
     });
   }
 

@@ -45,6 +45,21 @@ export class LoginPage {
     alert.present();
   }
   
+  loginFacebook (): void {
+    const options = {
+      requestPermissions: ['public_profile', 'user_friends', 'email']
+    };
+    
+    (<any>Meteor).loginWithFacebook(options, (error: Error) =>{
+      if (error) {
+        this.handleError(error);
+      } else {
+        console.log("Logged in with Facebook successfuly");
+        console.log(Meteor.user());
+      }
+    });
+  }
+  
   handleLogin ( alert: Alert ): void {
     alert.dismiss().then(() =>{
       return this.phoneService.verify(this.phone);

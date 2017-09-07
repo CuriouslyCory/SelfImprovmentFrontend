@@ -1,11 +1,22 @@
 import { Meteor } from 'meteor/meteor';
-import { Goals, Tallies, Users } from './collections';
 import { Accounts } from 'meteor/accounts-base'
+declare const ServiceConfiguration: any;
 
 Meteor.startup(() => {
   // code to run on server at startup
   if (Meteor.settings) {
     Object.assign(Accounts._options, Meteor.settings['accounts-phone']);
     SMS.twilio = Meteor.settings['twilio'];
+  }
+  
+  // Configuring oAuth services
+  const services = Meteor.settings.private.oAuth;
+  
+  if (services) {
+    for ( let service in services ) {
+      ServiceConfiguration.configurations.upsert({service: service}, {
+        $set: services[service]
+      });
+    }
   }
 });
